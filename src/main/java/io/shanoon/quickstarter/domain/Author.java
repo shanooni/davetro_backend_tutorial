@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class Author {
     private Long id;
     private String name;
-    private Long age;
+    private int age;
 }
