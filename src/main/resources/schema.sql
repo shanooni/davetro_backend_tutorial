@@ -1,12 +1,19 @@
-DROP TABLE IF EXISTS "widgets";
+DROP TABLE IF EXISTS "authors";
+DROP TABLE IF EXISTS "books";
 
-DROP SEQUENCE IF EXISTS widgets_id_seq;
 
-CREATE SEQUENCE widgets_id_seq INCREMENT BY 1 MINVALUE 1 MAXVALUE 923459696959494 CACHE 1;
+CREATE TABLE "authors"(
+                          "id" bigint not null,
+                          "name" text,
+                          "age" integer,
+                          constraint "authors_pkey" primary key ("id")
+);
 
-CREATE TABLE "widgets"(
-    "id" int default nextval('widgets_id_seq') not null ,
-    "name" text,
-    "purpose" text,
-    constraint "widgets_pkey" primary key ("id")
+CREATE TABLE "books"(
+    "isbn" text  not null ,
+    "title" text,
+    "author_id" bigint,
+    constraint "books_pkey" primary key ("isbn"),
+    constraint "fk_authors" foreign key (author_id) references authors(id)
+
 );

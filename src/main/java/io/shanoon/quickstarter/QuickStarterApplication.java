@@ -11,24 +11,12 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @Log
-public class QuickStarterApplication implements CommandLineRunner {
-
-    private final DataSource dataSource;
+public class QuickStarterApplication  {
 
 
-    public QuickStarterApplication(final DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(QuickStarterApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-
-        log.info("Data source: " + dataSource.toString());
-        final JdbcTemplate restTemplate = new JdbcTemplate(dataSource);
-        restTemplate.execute("select 1");
-    }
 }
