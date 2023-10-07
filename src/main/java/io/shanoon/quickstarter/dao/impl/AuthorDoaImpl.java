@@ -4,12 +4,14 @@ import io.shanoon.quickstarter.dao.AuthorDoa;
 import io.shanoon.quickstarter.domain.Author;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AuthorDoaImpl implements AuthorDoa {
     private final JdbcTemplate jdbcTemplate;
 
@@ -27,7 +29,7 @@ public class AuthorDoaImpl implements AuthorDoa {
     @Override
     public Optional<Author> findOne(Long id) {
         List<Author> results = jdbcTemplate.query(
-                "SELECT id, name, age, FROM author WHERE id = ? LIMIT 1",
+                "SELECT id,name,age FROM authors WHERE id = ? LIMIT 1",
                 new AuthorRowMapper(),id);
         return results.stream().findFirst();
     }

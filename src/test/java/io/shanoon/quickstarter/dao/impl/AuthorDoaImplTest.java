@@ -1,8 +1,7 @@
 package io.shanoon.quickstarter.dao.impl;
 
 
-import io.shanoon.quickstarter.dao.AuthorDoa;
-import io.shanoon.quickstarter.dao.impl.AuthorDoaImpl;
+import io.shanoon.quickstarter.TestDataUtil;
 import io.shanoon.quickstarter.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -26,11 +24,7 @@ public class AuthorDoaImplTest {
 
     @Test
     public void testThatCreateAuthorGenerateCorrectSql(){
-        Author author = Author.builder()
-                .id(1L)
-                .name("John Doe")
-                .age(45)
-                        .build();
+        Author author = TestDataUtil.createTestAuthor();
 
         underTest.create(author);
         verify(jdbcTemplate).update(
@@ -43,7 +37,7 @@ public class AuthorDoaImplTest {
     public void testThatFindOneGenerateCorrectSql(){
         underTest.findOne(1L);
         verify(jdbcTemplate).query(
-                eq("SELECT id, name, age, FROM author WHERE id = ? LIMIT 1"),
+                eq("SELECT id,name,age FROM authors WHERE id = ? LIMIT 1"),
                 ArgumentMatchers.<AuthorDoaImpl.AuthorRowMapper>any(),
                 eq(1L)
         );
