@@ -74,4 +74,20 @@ public class BookDaoImplIntegrationTest {
                 .contains(bookByAuthorA,bookByAuthorB,bookByAuthorC);
 
     }
+
+    @Test
+    public void testThatBookCanBeCreatedAndUpdated(){
+        Author author = createTestAuthorA();
+        authorDoa.create(author);
+        Book book = createBookByAuthorA();
+        book.setAuthorId(author.getId());
+        underTest.create(book);
+
+        book.setTitle("the new life");
+        underTest.update(book,book.getIsbn());
+
+        Optional<Book> testOne = underTest.findOne(book.getIsbn());
+        assertThat(testOne).isPresent();
+        assertThat(testOne.get()).isEqualTo(book);
+    }
 }

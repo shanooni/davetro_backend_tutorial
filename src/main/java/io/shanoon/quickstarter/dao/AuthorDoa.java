@@ -11,4 +11,7 @@ public interface AuthorDoa {
     Optional<Author> findOne(Long id);
 
     List<Author> findAll();
+
+
+    void update(Author author, long id);
 }

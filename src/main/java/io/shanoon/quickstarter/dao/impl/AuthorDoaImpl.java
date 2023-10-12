@@ -43,6 +43,14 @@ public class AuthorDoaImpl implements AuthorDoa {
         return results ;
     }
 
+    @Override
+    public void update(Author author, long authorId) {
+         jdbcTemplate.update(
+                "UPDATE authors SET id = ?, name = ?, age = ? WHERE id = ?",
+                author.getId(),author.getName(),author.getAge(),authorId
+        );
+    }
+
     public static class AuthorRowMapper implements RowMapper<Author>{
 
         @Override

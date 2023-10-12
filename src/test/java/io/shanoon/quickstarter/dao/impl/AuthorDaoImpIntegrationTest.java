@@ -52,4 +52,18 @@ public class AuthorDaoImpIntegrationTest {
                 .hasSize(3)
                 .contains(authorA,authorB,authorC);
     }
+
+    @Test
+    public void testThatAuthorCanBeCreatedAndUpdated(){
+        Author authorA = TestDataUtil.createTestAuthorA();
+        underTest.create(authorA);
+
+        authorA.setName("UPDATE");
+        underTest.update(authorA,authorA.getId());
+
+        Optional<Author> author = underTest.findOne(authorA.getId());
+
+        assertThat(author).isPresent();
+        assertThat(author.get()).isEqualTo(authorA);
+    }
 }
