@@ -34,6 +34,15 @@ public class AuthorDoaImpl implements AuthorDoa {
         return results.stream().findFirst();
     }
 
+    @Override
+    public List<Author> findAll() {
+        List<Author> results = jdbcTemplate.query(
+                "SELECT id, name, age FROM authors",
+                new AuthorRowMapper()
+        );
+        return results ;
+    }
+
     public static class AuthorRowMapper implements RowMapper<Author>{
 
         @Override

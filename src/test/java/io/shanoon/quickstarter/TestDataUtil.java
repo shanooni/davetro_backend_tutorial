@@ -7,7 +7,7 @@ public final class TestDataUtil {
     private TestDataUtil(){
     }
 
-    public static Author createTestAuthor() {
+    public static Author createTestAuthorA() {
         Author author = Author.builder()
                 .id(1L)
                 .name("John Doe")
@@ -15,6 +15,23 @@ public final class TestDataUtil {
                         .build();
         return author;
     }
+    public static Author createTestAuthorB() {
+        Author author = Author.builder()
+                .id(2L)
+                .name("Owusu Ansah")
+                .age(32)
+                .build();
+        return author;
+    }
+    public static Author createTestAuthorC() {
+        Author author = Author.builder()
+                .id(3L)
+                .name("Ama Serwah")
+                .age(23)
+                .build();
+        return author;
+    }
+
 
     public static Book createBook() {
         Book book = Book.builder()

@@ -24,7 +24,7 @@ public class AuthorDoaImplTest {
 
     @Test
     public void testThatCreateAuthorGenerateCorrectSql(){
-        Author author = TestDataUtil.createTestAuthor();
+        Author author = TestDataUtil.createTestAuthorA();
 
         underTest.create(author);
         verify(jdbcTemplate).update(
@@ -40,6 +40,16 @@ public class AuthorDoaImplTest {
                 eq("SELECT id,name,age FROM authors WHERE id = ? LIMIT 1"),
                 ArgumentMatchers.<AuthorDoaImpl.AuthorRowMapper>any(),
                 eq(1L)
+        );
+    }
+
+    @Test
+    public void testThatFindManyGenerateTheCorrectSql(){
+        underTest.findAll();
+
+        verify(jdbcTemplate).query(
+                eq("SELECT id, name, age FROM authors"),
+                ArgumentMatchers.<AuthorDoaImpl.AuthorRowMapper>any()
         );
     }
 }
