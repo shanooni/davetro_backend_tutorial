@@ -38,6 +38,14 @@ public class BookDoaImp implements BookDoa {
         return results.stream().findFirst();
     }
 
+    @Override
+    public List<Book> findAll() {
+        return jdbcTemplate.query(
+                "SELECT isbn, title, author_id FROM books",
+                new BookRowMapper()
+        );
+    }
+
     public static class BookRowMapper implements RowMapper<Book>{
 
         @Override

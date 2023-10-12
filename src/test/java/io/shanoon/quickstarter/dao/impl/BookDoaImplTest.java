@@ -26,7 +26,7 @@ public class BookDoaImplTest{
 
     @Test
     public void testThatCreateBookGenerateCorrectSql(){
-        Book book = TestDataUtil.createBook();
+        Book book = TestDataUtil.createBookByAuthorA();
 
         underTest.create(book);
 
@@ -46,6 +46,16 @@ public class BookDoaImplTest{
                 eq("SELECT isbn,title,author_id FROM books WHERE isbn = ? LIMIT 1"),
                 ArgumentMatchers.<BookDoaImp.BookRowMapper>any(),
                 eq("912-4-5-908")
+        );
+    }
+
+    @Test
+    public void testThatFindAllGeneratesTheCorrectSql(){
+        underTest.findAll();
+
+        verify(jdbcTemplate).query(
+                eq("SELECT isbn, title, author_id FROM books"),
+                ArgumentMatchers.<BookDoaImp.BookRowMapper>any()
         );
     }
 }
