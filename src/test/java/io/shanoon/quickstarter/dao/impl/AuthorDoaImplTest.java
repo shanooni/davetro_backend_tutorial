@@ -63,4 +63,17 @@ public class AuthorDoaImplTest {
                 1L, "John Doe", 45, 3L
         );
     }
+
+    @Test
+    public void testThatDeleteGeneratesTheCorrectSql(){
+
+        long bookId = 1L;
+
+        underTest.delete(bookId);
+
+        verify(jdbcTemplate).update(
+               "DELETE FROM authors WHERE id = ?",
+                 bookId
+        );
+    }
 }

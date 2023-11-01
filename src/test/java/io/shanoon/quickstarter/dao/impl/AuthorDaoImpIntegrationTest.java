@@ -50,7 +50,7 @@ public class AuthorDaoImpIntegrationTest {
 
         assertThat(authorList)
                 .hasSize(3)
-                .contains(authorA,authorB,authorC);
+                .containsExactly(authorA,authorB,authorC);
     }
 
     @Test
@@ -65,5 +65,17 @@ public class AuthorDaoImpIntegrationTest {
 
         assertThat(author).isPresent();
         assertThat(author.get()).isEqualTo(authorA);
+    }
+
+    @Test
+    public void testThatAuthorCanBeCreatedAndDeleted(){
+        Author author = TestDataUtil.createTestAuthorA();
+        underTest.create(author);
+
+        underTest.delete(author.getId());
+
+        Optional<Author> result = underTest.findOne(author.getId());
+
+        assertThat(result).isEmpty();
     }
 }

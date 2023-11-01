@@ -51,6 +51,14 @@ public class AuthorDoaImpl implements AuthorDoa {
         );
     }
 
+    @Override
+    public void delete(long bookId) {
+        jdbcTemplate.update(
+                "DELETE FROM authors WHERE id = ?",
+                bookId
+        );
+    }
+
     public static class AuthorRowMapper implements RowMapper<Author>{
 
         @Override

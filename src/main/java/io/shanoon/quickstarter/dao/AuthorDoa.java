@@ -14,4 +14,5 @@ public interface AuthorDoa {
 
 
     void update(Author author, long id);
+    void delete(long bookId);
 }

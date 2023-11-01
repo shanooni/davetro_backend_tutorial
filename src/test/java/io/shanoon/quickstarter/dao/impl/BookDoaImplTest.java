@@ -69,4 +69,14 @@ public class BookDoaImplTest{
         verify(jdbcTemplate).update("UPDATE books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?",
                 "912-4-5-908", "The lost Lands", 1L, "912-4-5-908");
     }
+
+    @Test
+    public void testThatDeleteGeneratesTheCorrectSql(){
+        underTest.delete("912-4-5-908");
+
+        verify(jdbcTemplate).update(
+                "DELETE FROM books WHERE isbn = ?",
+                "912-4-5-908"
+        );
+    }
 }
